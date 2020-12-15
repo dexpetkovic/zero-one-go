@@ -16,7 +16,7 @@ To create an account, we send an Account object, serialized as JSON, to the API.
 
 This implies the need to create an explicit Account object.
 
-## How to create test case
+## Creating Account test case
 
 First step in creating test case is to create a file named `account_test.go`, which will contain tests for code in `account.go`.
 
@@ -78,7 +78,7 @@ Method `toJSON` will return something that looks like a tuple, but is essentiall
 
 So now we have account Jason which is of type account and we have error variable. The error variable shby convention should contain error object with a message on what exactly failed.
 
-This is a solution in goal on how to handle errors in your application. Instead of using exceptions, Go applications (or actually go methods) return error object to caller so that caller can decide what to do with it.
+This is a solution in goal on how to handle errors in your application. Instead of using exceptions, Go applications (or actually Go methods) return error object to caller, so that caller can decide what to do with it.
 
 ```
 expected := `{"type":"accounts","id":"DBC1D4F4-82E7-4286-B169-1D1B7D0D3989","organisation_id":"934AD475-6612-44A1-A0E8-6D74408780BC","attributes":{"country":"NL","base_currency":"EUR"}}`
@@ -102,4 +102,6 @@ In the first check above we will check if we managed to cast account object to J
 
 In the second check, we check whether the expected Account JSON is the same as the actual one (the one returned by our `toJSON()` method). The compared types here are String.
 
-Final test case can be seen [here](../src/accountapi/account_test.go)
+Final test case for Account `toJSON()` can be seen [here](../src/accountapi/account_test.go).
+
+## Creating Service test case

@@ -1,5 +1,5 @@
 # Zero, One, GO!
------
+
 Zero, One, GO! is a step by step tutorial aimed at beginners in Go.
 
 It offers an (opinionated) guide on how to create a simple library using Go.
@@ -23,4 +23,5 @@ I recommend reading the tutorial in this order:
 
 ## License
 Copyright 2020-2021 Dejan Petković
+
 Licensed under the Creative Commons CC0 1.0 Universal license

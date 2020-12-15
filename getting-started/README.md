@@ -37,3 +37,27 @@ Further to this:
 * We will not implement authentication
 * Bank accounts will be created, fetched, listed and deleted
 * We will use these [API specifications](api-specs.md)
+
+## Architecture of Account API library
+
+The architecture of the Account API library and the backend API that we abstract can be at best described with the helicopter view.
+
+<p align="center">
+  <img src="AccountAPI-design.png">
+  <br/>
+</p>
+
+For the caller application, our AccountAPI library will support the following operations:
+* Create Account
+* Fetch single Account
+* List all Accounts, with paging support
+* Delete Account
+
+To accomplish this functionality we will decouple the account API library into several pieces. 
+* The key functionality will be described in [service](../src/accountapi/service.go) and its [tests](../src/accountapi/service_test.go) 
+* [Service](../src/accountapi/service.go) will depend on the HTTP [client](../src/accountapi/client.go). The [client](../src/accountapi/client.go) will perform the actual calls towards the actual API backend, mocked in [client tests](../src/accountapi/client_tests.go)
+* [Configuration](../src/accountapi/configuration.go) will manage library config
+* [Account](../src/accountapi/account.go) will define Account objects that will be sent or received as JSON payload
+* [Errors](../src/accountapi/errors.go) will define Error objects that will be sent or received as JSON payload
+
+We will first describe [how to write test cases in details](../writing-tests/README.md) and then build the library components.
