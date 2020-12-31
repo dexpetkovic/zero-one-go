@@ -20,9 +20,6 @@ type sliceResponseBody struct {
 	Data []Account `json:"data"`
 }
 
-// Load configuration from simple config struct
-var uri = config.AccountAPIUrl
-
 // Create method instantiates an Account object and creates an account resource via API
 func Create(
 	Type string,
@@ -78,7 +75,7 @@ func Create(
 }
 
 // Create creates an account resource via API from given Account object
-func (account Account) Create() (Account, error) {
+func (account Account) Create(config Configuration) (Account, error) {
 
 	var createdAccount Account
 	var createAccountResponseBody responseBody
@@ -95,7 +92,7 @@ func (account Account) Create() (Account, error) {
 	}
 
 	// Create account resource
-	createAccountResponse, err = doPost(uri, accountJSONReq)
+	createAccountResponse, err = doPost(config.AccountAPIUrl, accountJSONReq)
 
 	if err != nil {
 		//log.Printf("Request failed: %v", err)
@@ -116,12 +113,12 @@ func (account Account) Create() (Account, error) {
 }
 
 // FetchAccount fetches an account resource from Account API with given Account ID
-func FetchAccount(accountID string) (Account, error) {
+func FetchAccount(config Configuration, accountID string) (Account, error) {
 	var fetchedAccount Account
 	var fetchAccountResponseBody responseBody
 	var fetchAccountResponse []byte
 	var err error
-	var fetchURI = uri + accountID
+	var fetchURI = config.AccountAPIUrl + accountID
 	var queryParams = ""
 
 	// Fetch account resource
@@ -146,7 +143,7 @@ func FetchAccount(accountID string) (Account, error) {
 }
 
 // ListAccounts fetches paged account resources that match given filter
-func ListAccounts(pageNumber int, pageSize int) ([]Account, error) {
+func ListAccounts(config Configuration, pageNumber int, pageSize int) ([]Account, error) {
 	var listedAccounts []Account
 	var listAccountsResponseBody sliceResponseBody
 	var listAccountsResponse []byte
@@ -154,7 +151,7 @@ func ListAccounts(pageNumber int, pageSize int) ([]Account, error) {
 	var queryParams = "?page[number]=" + fmt.Sprint(pageNumber) + "&page[size]=" + fmt.Sprint(pageSize)
 
 	// List account resource
-	listAccountsResponse, err = doGet(uri, queryParams)
+	listAccountsResponse, err = doGet(config.AccountAPIUrl, queryParams)
 
 	if err != nil {
 		//log.Printf("Request failed: %v", err)
@@ -174,8 +171,8 @@ func ListAccounts(pageNumber int, pageSize int) ([]Account, error) {
 }
 
 // DeleteAccount deletes account resource with given ID
-func DeleteAccount(accountID string, version int) error {
-	var deleteURI = uri + accountID
+func DeleteAccount(config Configuration, accountID string, version int) error {
+	var deleteURI = config.AccountAPIUrl + accountID
 	var queryParams = "?version=" + fmt.Sprint(version)
 
 	// DELETE, when successful, does not return content.

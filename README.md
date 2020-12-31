@@ -12,7 +12,9 @@ In this tutorial I tried to capture learnings of Go I have acquired while doing 
 
 I will try to give simple explanations of code snippets that can be used for rapid getting started and development in Go.
 
-The end goal of the tutorial is to create a library that abstracts away a REST API and gives user an ability to use the API without knowing anything about it's implementation.
+The end goal of the tutorial is to create a library that abstracts away a REST API of a Bank and gives user an ability to use the Bank's API without knowing anything about it's implementation.
+
+For simplicity, we will manage lifecycle of a bank account with the AccountAPI library, so that user of that library does not have to know anything about the actual Bank API. 
 
 ## Titles
 

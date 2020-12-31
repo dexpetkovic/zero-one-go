@@ -29,25 +29,25 @@ A quick summary of steps you need to get started:
 
 ## What are we actually building?
 
-The goal of this tutorial is to write a client library in Go which will access a REST API for management of bank accounts.
+The goal of this tutorial is to write a client library in Go which will access REST API of a Bank, for the management of bank accounts.
 
-We will first implement our library against mocked API and later on use the real API.
+We will first implement our library against mocked Bank API and later on use the real API.
 
 Further to this:
 * We will not implement authentication
-* Bank accounts will be created, fetched, listed and deleted
-* We will use these [API specifications](api-specs.md)
+* Bank accounts will be created, fetched, listed and deleted using this library
+* We will use [Bank's API specifications](api-specs.md) which describe the API and it's contract
 
 ## Architecture of Account API library
 
-The architecture of the Account API library and the backend API that we abstract can be at best described with the helicopter view.
+The architecture of the Account API library and the Bank's backend API that we abstract can be at best described with the helicopter view.
 
 <p align="center">
   <img src="AccountAPI-design.png">
   <br/>
 </p>
 
-For the caller application, our AccountAPI library will support the following operations:
+For the caller application, our AccountAPI library will support the following operations on Bank's REST API:
 * Create Account
 * Fetch single Account
 * List all Accounts, with paging support
@@ -60,4 +60,4 @@ To accomplish this functionality we will decouple the account API library into s
 * [Account](../src/accountapi/account.go) will define Account objects that will be sent or received as JSON payload
 * [Errors](../src/accountapi/errors.go) will define Error objects that will be sent or received as JSON payload
 
-We will first describe [how to write test cases in details](../writing-tests/README.md) and then build the library components.
+We will first describe [how to write test cases in details](../writing-tests/README.md) and then build the library components based on test cases - Test Driven Development in action!
