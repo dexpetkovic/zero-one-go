@@ -21,7 +21,7 @@ type sliceResponseBody struct {
 }
 
 // Create method instantiates an Account object and creates an account resource via API
-func Create(
+func (config Configuration) Create(
 	Type string,
 	ID string,
 	OrganisationID string,
@@ -70,12 +70,12 @@ func Create(
 		},
 	}
 
-	return account.Create()
+	return config.CreateAccount(account)
 
 }
 
-// Create creates an account resource via API from given Account object
-func (account Account) Create(config Configuration) (Account, error) {
+// CreateAccount creates an account resource via API from given Account object
+func (config Configuration) CreateAccount(account Account) (Account, error) {
 
 	var createdAccount Account
 	var createAccountResponseBody responseBody
@@ -113,7 +113,7 @@ func (account Account) Create(config Configuration) (Account, error) {
 }
 
 // FetchAccount fetches an account resource from Account API with given Account ID
-func FetchAccount(config Configuration, accountID string) (Account, error) {
+func (config Configuration) FetchAccount(accountID string) (Account, error) {
 	var fetchedAccount Account
 	var fetchAccountResponseBody responseBody
 	var fetchAccountResponse []byte
@@ -143,7 +143,7 @@ func FetchAccount(config Configuration, accountID string) (Account, error) {
 }
 
 // ListAccounts fetches paged account resources that match given filter
-func ListAccounts(config Configuration, pageNumber int, pageSize int) ([]Account, error) {
+func (config Configuration) ListAccounts(pageNumber int, pageSize int) ([]Account, error) {
 	var listedAccounts []Account
 	var listAccountsResponseBody sliceResponseBody
 	var listAccountsResponse []byte
@@ -171,7 +171,7 @@ func ListAccounts(config Configuration, pageNumber int, pageSize int) ([]Account
 }
 
 // DeleteAccount deletes account resource with given ID
-func DeleteAccount(config Configuration, accountID string, version int) error {
+func (config Configuration) DeleteAccount(accountID string, version int) error {
 	var deleteURI = config.AccountAPIUrl + accountID
 	var queryParams = "?version=" + fmt.Sprint(version)
 
